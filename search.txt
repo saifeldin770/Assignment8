@@ -1,0 +1,40 @@
+Authentication vs. authorization
+
+Authentication (AuthN) answers “who are you?” It verifies identity, for example with a username and password.
+
+Authorization (AuthZ) answers “what are you allowed to do?” It checks permissions, for example whether you’re an Admin or a normal User.
+
+Authentication always comes first, then authorization.
+____________________________________________________________________________________________
+____________________________________________________________________________________________
+____________________________________________________________________________________________
+Why tokens exist?
+
+HTTP is stateless: the server doesn’t remember you between requests. Sending your username and password with every request would be insecure and wasteful. Instead:
+
+1. The client logs in once with credentials.
+2. The server verifies them and returns a token, a string that proves “this client already authenticated”.
+3. The client sends that token with every later request.
+____________________________________________________________________________________________
+____________________________________________________________________________________________
+____________________________________________________________________________________________
+What is a token?
+
+A token is a string issued by the server after a successful login. It represents the user’s identity and usually has an expiry time. There are two common types:
+Opaque token : A random string. The server looks it up in a database or cache to find out who it belongs to.
+JWT (JSON Web Token) : A self-contained token. The user info (claims) is inside it, signed by the server, so no database lookup is needed.
+____________________________________________________________________________________________
+____________________________________________________________________________________________
+____________________________________________________________________________________________
+JWT structure
+
+A JWT has 3 parts separated by dots: header.payload.signature
+
+Header: the token type and signing algorithm (e.g. HS256).
+Payload: the claims, such as sub (user id), role, and exp (expiry).
+Signature: proves the token wasn’t modified. It’s computed with a secret key that only the server knows.
+The payload is only Base64-encoded, not encrypted, so anyone can read it. Never put passwords or sensitive data in it.
+____________________________________________________________________________________________
+____________________________________________________________________________________________
+____________________________________________________________________________________________
+“Bearer” describes how the token is sent, not the token’s format. It means “whoever bears (holds) this token gets access”. The server doesn’t check who is holding it, only that the token is valid.

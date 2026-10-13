@@ -1,0 +1,7 @@
+Hashing is used such as convert password from plain text to cipher text and you can't convert cipher text to plain text again ,if you can convert cipher text to plain text again this is called encryption ,the cipher text is stored in the database, and i use compare to compare if plain text equal this cipher text.
+salt round means hashing is done how many.
+if salt round =3 means hashing done 2^3 times.
+we use Bcrypt Generator to test hash.
+we use Bcrypt hash.
+Encryption is divided into symmetric and asymmertric.
+Encryption symmetric means on the one server you do encryption and decryption,key on the same server.
